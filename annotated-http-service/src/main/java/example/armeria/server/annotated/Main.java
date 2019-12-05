@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.linecorp.armeria.server.Server;
 import com.linecorp.armeria.server.ServerBuilder;
 import com.linecorp.armeria.server.docs.DocService;
+import com.linecorp.armeria.server.healthcheck.HealthCheckService;
 
 public class Main {
 
@@ -41,6 +42,7 @@ public class Main {
                  .annotatedService("/injection", new InjectionService())
                  .annotatedService("/messageConverter", new MessageConverterService())
                  .annotatedService("/exception", new ExceptionHandlerService())
+                 .service("/health", HealthCheckService.builder().build())
                  .serviceUnder("/docs", new DocService())
                  .build();
     }
